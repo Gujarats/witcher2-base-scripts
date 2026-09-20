@@ -1106,9 +1106,9 @@ import class CPlayer extends CActor
 	function SetDarkWeaponSteel( val : bool )  		 
 	{
 
+		darkWeaponSteel = val;
 		//===ProjectMersey=== BEGIN - Disable dark effect on full dark armor set - Author: QuietusPlus
 		/* 
-		darkWeaponSteel = val; 
 		if(val)
 		{
 			//First we should turn off all effects
@@ -7782,9 +7782,12 @@ thePlayer.RemoveAllBuffs();
 
 /////////////////////// DLC ///////////////////////////////////
 
+//===ProjectMersey=== - Disable all DLC gear from being automatically added to inventory
 	event OnDlc_roche_jacket()
 	{
+		/*
 		GetInventory().AddItem( 'Roche Commando Jacket', 1, true );
+		*/
 	}
 	
 	event OnDlc_alchemy_suit()

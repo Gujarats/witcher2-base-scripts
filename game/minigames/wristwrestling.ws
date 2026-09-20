@@ -2,7 +2,7 @@
 /** Witcher Script file
 /***********************************************************************/
 /** Wrist Wrestling Minigame
-/** Copyright © 2010 CD Projekt RED
+/** Copyright ï¿½ 2010 CD Projekt RED
 /***********************************************************************/
 
 /*
@@ -969,7 +969,7 @@ class WristWrestlingLogicSimple extends WristWrestlingLogic
 		}
 		else if ( m_barPos < -0.9 )
 		{
-			m_winner = 0;
+			m_winner = 1;
 			return true;
 		}
 		

@@ -1106,8 +1106,6 @@ import class CPlayer extends CActor
 	function SetDarkWeaponSteel( val : bool )  		 
 	{ 
 		darkWeaponSteel = val; 
-		//===ProjectMersey=== BEGIN - Disable dark effect on full dark armor set - Author: QuietusPlus
-		/*
 		if(val)
 		{
 			//First we should turn off all effects
@@ -4058,6 +4056,18 @@ mBoolean( true ) );
 	function SetBasicAbility()
 	{
 		GetCharacterStats().AddAbility('Witcher Default');
+		GetCharacterStats().AddAbility('training_s1');
+		GetCharacterStats().AddAbility('training_s1_2');
+		GetCharacterStats().AddAbility('training_s2');
+		GetCharacterStats().AddAbility('training_s2_2');
+		GetCharacterStats().AddAbility('training_s3');
+		GetCharacterStats().AddAbility('training_s3_2');
+		GetCharacterStats().AddAbility('training_s4');
+		GetCharacterStats().AddAbility('training_s4_2');
+		GetCharacterStats().AddAbility('training_s5');
+		GetCharacterStats().AddAbility('training_s5_2');
+		GetCharacterStats().AddAbility('training_s6');
+		GetCharacterStats().AddAbility('training_s6_2');
 	}
 	
 	// EXPERIENCE AND TALENT POINTS
@@ -7419,7 +7429,7 @@ thePlayer.RemoveAllBuffs();
 				itemName = StringToName("magic_s" + i + "_2" );
 				if ( thePlayer.GetCharacterStats().HasAbility(itemName) ) thePlayer.GetCharacterStats().RemoveAbility(itemName);
 			}
-		talents = level - 2;
+		talents = (level - 1) * 2; // during respect keep +2 talents acquired from level up
 	}	
 	function AllowCombatRotation(flag : bool)
 	{
@@ -7591,7 +7601,7 @@ thePlayer.RemoveAllBuffs();
 					thePlayer.GetInventory().AddItem('Moonblade', 1);
 				}
 			}
-			else if ( StrFindFirst( item, "it_stlswd_012" ) != -1 /*|| StrFindFirst( item, "m0_it_stlswd05" )*/)//ProjectMersey
+			else if ( StrFindFirst( item, "it_stlswd_012" ) != -1 || StrFindFirst( item, "m0_it_stlswd05" ))
 			{
 				if ( !FactsDoesExist('import_item_mahakamanrunesihil') )
 				{
@@ -7769,17 +7779,13 @@ thePlayer.RemoveAllBuffs();
 
 /////////////////////// DLC ///////////////////////////////////
 
-	//===ProjectMersey=== - Disable all DLC gear from being automatically added to inventory
 	event OnDlc_roche_jacket()
 	{
-		/*
 		GetInventory().AddItem( 'Roche Commando Jacket', 1, true );
-		*/
 	}
 	
 	event OnDlc_alchemy_suit()
 	{
-		/*
 		GetInventory().AddItem( 'Herbalist Gloves', 1, true );
 		
 		//GetInventory().AddItem( 'White Myrtle Petals', 15, true ); jaskolcze ziele, przestep, tegoskor
@@ -7791,24 +7797,20 @@ thePlayer.RemoveAllBuffs();
 		//GetInventory().AddItem( 'Bryony', 10, true );
 		GetInventory().AddItem( 'Verbena', 8, true );
 		GetInventory().AddItem( 'Balisse', 8, true );
-		*/
 	}
 
 	event OnDlc_magical_suit()
 	{
-		/*
 		GetInventory().AddItem( 'Unique Essenced Pants', 1, true );
 		
 		GetInventory().AddItem( 'Rune of Sun', 1, true );
 		GetInventory().AddItem( 'Rune of Earth', 1, true );
 		GetInventory().AddItem( 'Rune of Moon', 1, true );
 		GetInventory().AddItem( 'Rune of Fire', 1, true );
-		*/
 	}
 	
 	event OnDlc_swordsman_suit()
 	{
-		/*
 		GetInventory().AddItem( 'Unique Whetstone', 10, true );
 		
 		GetInventory().AddItem( 'Brown Oil', 4, true );
@@ -7819,7 +7821,6 @@ thePlayer.RemoveAllBuffs();
 		GetInventory().AddItem( 'Cerbin Blath', 4, true );
 		GetInventory().AddItem( 'Surge', 4, true );
 		//GetInventory().AddItem( 'Argentia', 4, true );
-		*/
 	}
 	
 	event OnDlc_troll()

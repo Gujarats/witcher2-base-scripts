@@ -7781,7 +7781,7 @@ thePlayer.RemoveAllBuffs();
 
 /////////////////////// DLC ///////////////////////////////////
 
-    //===ProjectMersey=== - Disable all DLC gear from being automatically added to inventory
+	//===ProjectMersey=== - Disable all DLC gear from being automatically added to inventory
 	event OnDlc_roche_jacket()
 	{
 		/*

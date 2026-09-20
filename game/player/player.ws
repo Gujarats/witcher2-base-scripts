@@ -1105,10 +1105,9 @@ import class CPlayer extends CActor
 	}
 	function SetDarkWeaponSteel( val : bool )  		 
 	{
-
 		darkWeaponSteel = val;
 		//===ProjectMersey=== BEGIN - Disable dark effect on full dark armor set - Author: QuietusPlus
-		/* 
+		/*
 		if(val)
 		{
 			//First we should turn off all effects

@@ -1104,7 +1104,10 @@ import class CPlayer extends CActor
 		//===ProjectMersey END=== - Disable dark effect on full dark armor set - Author: QuietusPlus
 	}
 	function SetDarkWeaponSteel( val : bool )  		 
-	{ 
+	{
+
+		//===ProjectMersey=== BEGIN - Disable dark effect on full dark armor set - Author: QuietusPlus
+		/* 
 		darkWeaponSteel = val; 
 		if(val)
 		{
@@ -7601,7 +7604,7 @@ thePlayer.RemoveAllBuffs();
 					thePlayer.GetInventory().AddItem('Moonblade', 1);
 				}
 			}
-			else if ( StrFindFirst( item, "it_stlswd_012" ) != -1 || StrFindFirst( item, "m0_it_stlswd05" ))
+			else if ( StrFindFirst( item, "it_stlswd_012" ) != -1 /*|| StrFindFirst( item, "m0_it_stlswd05" )*/)//ProjectMersey
 			{
 				if ( !FactsDoesExist('import_item_mahakamanrunesihil') )
 				{
@@ -7786,6 +7789,7 @@ thePlayer.RemoveAllBuffs();
 	
 	event OnDlc_alchemy_suit()
 	{
+		/*
 		GetInventory().AddItem( 'Herbalist Gloves', 1, true );
 		
 		//GetInventory().AddItem( 'White Myrtle Petals', 15, true ); jaskolcze ziele, przestep, tegoskor
@@ -7797,20 +7801,24 @@ thePlayer.RemoveAllBuffs();
 		//GetInventory().AddItem( 'Bryony', 10, true );
 		GetInventory().AddItem( 'Verbena', 8, true );
 		GetInventory().AddItem( 'Balisse', 8, true );
+		*/
 	}
 
 	event OnDlc_magical_suit()
 	{
+		/*
 		GetInventory().AddItem( 'Unique Essenced Pants', 1, true );
 		
 		GetInventory().AddItem( 'Rune of Sun', 1, true );
 		GetInventory().AddItem( 'Rune of Earth', 1, true );
 		GetInventory().AddItem( 'Rune of Moon', 1, true );
 		GetInventory().AddItem( 'Rune of Fire', 1, true );
+		*/
 	}
 	
 	event OnDlc_swordsman_suit()
 	{
+		/*
 		GetInventory().AddItem( 'Unique Whetstone', 10, true );
 		
 		GetInventory().AddItem( 'Brown Oil', 4, true );
@@ -7821,6 +7829,7 @@ thePlayer.RemoveAllBuffs();
 		GetInventory().AddItem( 'Cerbin Blath', 4, true );
 		GetInventory().AddItem( 'Surge', 4, true );
 		//GetInventory().AddItem( 'Argentia', 4, true );
+		*/
 	}
 	
 	event OnDlc_troll()

@@ -1,7 +1,7 @@
-import function FindEnemiesInCombatArea() : array< CActor >;														
 // ---------------------------------------------------------
 //                  shitty CSTakedown class
 // ---------------------------------------------------------
+import function FindEnemiesInCombatArea() : array< CActor >;//===ProjectMersey=== - Don't perform finishers unless target is last enemy - Author: QuietusPlus
 
 class CSTakedown extends CStateMachine
 {	
@@ -133,59 +133,8 @@ state Idle in CSTakedown
 		var deathData : SActorDeathData;
 		var finisherRange : EFinisherDistance;
 		
-		var enemiesCloseHostile : int;
-		var npc : CNewNPC;
-		var doInstantKill : bool;																   
-		
-		doInstantKill = false;
-		
 		finisherRange = FD_Medium;
 		if ( ! target || target.IsBoss() ) return;
-		
-		if(target.IsBoss() && target.GetHealthPercentage() > 25.0f)
-		{
-			return;
-		}
-		if(target.GetHealthPercentage() > 50.0f)
-		{
-			return;
-		}
-		
-		if ( target.GetCurrentStateName() == 'Knockdown' ) {
-			
-			GetActorsInRange(enemiesClose, 15.0, '', thePlayer);
-			enemiesCloseHostile = 0;
-			
-			for ( i=0; i < enemiesClose.Size(); i+=1 ) {
-				npc = (CNewNPC)enemiesClose[i];
-				if ( npc && npc.IsAlive() && npc.GetAttitude(thePlayer) == AIA_Hostile ) {
-					enemiesCloseHostile += 1;
-				}
-			}			
-			// 50% chance to play finisher on knockdown non boss rank last enemy with health <= 50%
-			
-			if ( enemiesCloseHostile == 1 && RandF() * 100 < 50 ) {
-				doInstantKill = false;
-			} else {
-				doInstantKill = true;
-			}
-		}
-		
-		if( doInstantKill && !target.IsBoss() ) {
-			target.noragdollDeath = true;
-			deathData.deadState = true;
-			target.EnterDead(deathData);
-			CalculateGainedExperienceAfterKill(target, true, true, false);
-			
-			//target.Kill(false, thePlayer, deathData);
-			
-			//target.StopEffect('stun_fx');
-			
-			// blood splatter screen effect
-			target.PlayEffect('instant_kill_fx');
-			return; 
-		}
-		
 		csIds = GetStringCSNumber( RoundF( RandRangeF( 1, 4 ) ) );
 		
 		names.PushBack("witcher");
@@ -237,7 +186,7 @@ state Idle in CSTakedown
 			{
 				enemiesClose[i].SetHideInGame( false );
 				enemiesClose[i].GetBehTreeMachine().Restart();
-			}						
+			}
 			if(theGame.GetIsPlayerOnArena())
 			{
 				thePlayer.ShowArenaPoints(thePlayer.GetCharacterStats().GetAttribute('arena_fin1_bonus'));
@@ -829,55 +778,59 @@ state Idle in CSTakedown
 		var targets : array<CActor>;
 		var takedownParams : STakedownParams;
 		var cutsceneRange : EFinisherDistance;
+
+		//===ProjectMersey=== BEGIN - Don't perform finishers unless target is last enemy - Author: QuietusPlus
 		var enemiesCloseHostile : int;
 		var npc : CNewNPC;
 		var doInstantKill : bool;
-																		   
+		//===ProjectMersey=== END - Don't perform finishers unless target is last enemy - Author: QuietusPlus
+
 		targets.PushBack(target);
-		
-		if(target.IsBoss() && target.GetHealthPercentage() > 25.0f)
+
+		//===ProjectMersey=== BEGIN - Don't perform finishers unless target is last enemy - Author: QuietusPlus
+		if ( target.GetCurrentStateName() == 'Stun' )
 		{
-			return;
-		}
-		if(target.GetHealthPercentage() > 50.0f)
-		{
-			return;
-		}
-		
-		if ( target.GetCurrentStateName() == 'Stun' ) {
-			
 			GetActorsInRange(enemiesClose, 15.0, '', thePlayer);
 			enemiesCloseHostile = 0;
 			
-			for ( i=0; i < enemiesClose.Size(); i+=1 ) {
+			for ( i=0; i < enemiesClose.Size(); i+=1 )
+			{
 				npc = (CNewNPC)enemiesClose[i];
-				if ( npc && npc.IsAlive() && npc.GetAttitude(thePlayer) == AIA_Hostile ) {
+				if ( npc && npc.IsAlive() && npc.GetAttitude(thePlayer) == AIA_Hostile )
+				{
 					enemiesCloseHostile += 1;
 				}
 			}
 			
-			// 50% chance to play finisher
-			if ( enemiesCloseHostile == 1 && RandF() * 100 < 50 ) {
+			if ( enemiesCloseHostile == 1 && RandF() * 100 < 50 )
+			{
 				doInstantKill = false;
-			} else {
+			}
+			else
+			{
 				doInstantKill = true;
 			}
 		}
 		
-		if( doInstantKill && !target.IsBoss() ) {
+		if( doInstantKill )
+		{
 			target.Kill(false, thePlayer, deathData);
 			target.StopEffect('stun_fx');
 			target.PlayEffect('instant_kill_fx');
 
-			for( i=0; i < enemiesClose.Size(); i+=1 ) {		
+			for( i=0; i < enemiesClose.Size(); i+=1 )
+			{		
 				npc = (CNewNPC)enemiesClose[i];
-				if ( npc && npc.IsAlive() && npc.GetAttitude(thePlayer) == AIA_Hostile ) {
+				if ( npc && npc.IsAlive() && npc.GetAttitude(thePlayer) == AIA_Hostile )
+				{
 					npc.StopEffect('stun_fx');
 					npc.OnCriticalEffectStop( CET_Stun );
 				}
 			}
 			return; 
-		}										 
+		}
+		//===ProjectMersey=== END - Don't perform finishers unless target is last enemy - Author: QuietusPlus
+		
 		if(adrenaline)
 		{
 			thePlayer.SetAdrenaline( 0 );

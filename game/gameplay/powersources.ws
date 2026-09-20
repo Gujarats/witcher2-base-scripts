@@ -138,11 +138,23 @@ class CPowerSource extends CGameplayEntity
 			theHud.m_hud.ShowTutorial("tut21", "tut21_333x166", false);
 			//theHud.ShowTutorialPanelOld( "tut21", "tut21_333x166" );
 			theHud.Invoke("vHUD.blinkMed");
+			//===ProjectMersey=== BEGIN - Place of Power medallion fix - Author: HautdenLukas
+			/*
 			theSound.PlaySound("gui/hud/medalionwarning");
 			if ( !wasUsed && isVisible)
 			{
 				onUse();
 			}
+			*/
+			if ( !wasUsed )
+			{
+				theSound.PlaySound("gui/hud/medalionwarning");
+				if ( isVisible )
+				{
+					onUse();
+				}
+			}
+			//===ProjectMersey=== END - Place of Power medallion fix - Author: HautdenLukas
 		}
 	}
 	

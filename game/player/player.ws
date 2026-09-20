@@ -3,7 +3,7 @@
 /** Witcher Script file
 /***********************************************************************/
 /** Object classes exprots
-/** Copyright © 2009 Dexio's Late Night R&D Home Center
+/** Copyright ï¿½ 2009 Dexio's Late Night R&D Home Center
 /***********************************************************************/
 
 struct SEnemySelection
@@ -1035,25 +1035,32 @@ import class CPlayer extends CActor
 		
 	}
 	
-	function DarkSetEffect() {
-		if( darkWeaponSilver || darkWeaponSteel ) {
-			if( !IsDarkSet() && !thePlayer.IsDarkEffect() &&  !thePlayer.IsNotGeralt()) {
-				//theCamera.PlayEffect('dark_difficulty');
-				//SetDarkEffect( true );
+	//===ProjectMersey=== BEGIN - Disable dark effect on full dark armor set - Author: QuietusPlus
+	function DarkSetEffect()
+	{
+		if( darkWeaponSilver || darkWeaponSteel )
+		{
+			if( !IsDarkSet() && !thePlayer.IsDarkEffect() &&  !thePlayer.IsNotGeralt())
+			{
+				theCamera.PlayEffect('dark_difficulty');
+				SetDarkEffect( true );
 				SetDarkWeaponAddVitality( false );
-			} else {
-				//theCamera.StopEffect('dark_difficulty');
-				//SetDarkEffect( false );
+			}
+			else
+			{
+				theCamera.StopEffect('dark_difficulty');
+				SetDarkEffect( false );
 				SetDarkWeaponAddVitality( true );
 			}
 		}
 		else
 		{
-			//theCamera.StopEffect('dark_difficulty');
-			//SetDarkEffect( false );
+			theCamera.StopEffect('dark_difficulty');
+			SetDarkEffect( false );
 			SetDarkWeaponAddVitality( false );
 		}
 	}
+	//===ProjectMersey=== END - Disable dark effect on full dark armor set - Author: QuietusPlus
 	
 	function IsDarkEffect() : bool             		 { return darkEffect; }
 	function SetDarkEffect( val : bool )       		 
@@ -1071,10 +1078,60 @@ import class CPlayer extends CActor
 	function SetDarkWeaponSilver( val : bool ) 		 
 	{ 
 		darkWeaponSilver = val; 
+		//===ProjectMersey=== BEGIN - Disable dark effect on full dark armor set - Author: QuietusPlus
+		/*
+		if(val)
+		{
+			//First we should turn off all effects
+			//SetDarkEffect( false );
+			//SetDarkWeaponAddVitality( false );
+			theCamera.StopEffect('dark_difficulty');
+			
+			SetDarkWeaponAddVitality( true );
+			if(!thePlayer.IsDarkEffect())
+			{
+				if ( !thePlayer.IsNotGeralt() ) theCamera.PlayEffect('dark_difficulty');
+				SetDarkEffect( true );
+			}
+		}
+		else
+		{
+			SetDarkEffect( false );
+			SetDarkWeaponAddVitality( false );
+			theCamera.StopEffect('dark_difficulty');
+		}
+		*/
+		//===ProjectMersey END=== - Disable dark effect on full dark armor set - Author: QuietusPlus
 	}
 	function SetDarkWeaponSteel( val : bool )  		 
 	{ 
 		darkWeaponSteel = val; 
+		//===ProjectMersey=== BEGIN - Disable dark effect on full dark armor set - Author: QuietusPlus
+		/*
+		if(val)
+		{
+			//First we should turn off all effects
+			//SetDarkEffect( false );
+			//SetDarkWeaponAddVitality( false );
+			
+			theCamera.StopEffect('dark_difficulty');
+			
+			SetDarkWeaponAddVitality( true );
+
+			if(!thePlayer.IsDarkEffect())
+			{
+				if ( !thePlayer.IsNotGeralt() ) theCamera.PlayEffect('dark_difficulty');
+				SetDarkEffect( true );
+			}
+		}
+		else
+		{
+			SetDarkEffect( false );
+			SetDarkWeaponAddVitality( false );
+			theCamera.StopEffect('dark_difficulty');
+		}
+		*/
+		//===ProjectMersey=== END - Disable dark effect on full dark armor set - Author: QuietusPlus
 	}
 	function SetDarkWeaponAddVitality( val : bool )  
 	{ 
@@ -1459,96 +1516,6 @@ import class CPlayer extends CActor
 			return true;
 		}
 	}
-		
-/////////////////////////////////////////////////////////////////////////////////////////
-// ExperiencedGeralt Camera Timers
-//////////////////////////////////////////////////////////////////////////////////////////
-
-	timer function ExperiencedGeralt_Timer_Camera_Left( timeDelta : float )
-	{
-		if ( theGame.GetGameInputValue('GI_Camera_Left') > 0.5f )
-		{
-			ExperiencedGeralt_Camera_Left();
-			thePlayer.AddTimer('ExperiencedGeralt_Timer_Camera_Left', 0.010, true, false);
-		}
-		else
-			thePlayer.RemoveTimer('ExperiencedGeralt_Timer_Camera_Left');
-	}
-	timer function ExperiencedGeralt_Timer_Camera_Right( timeDelta : float )
-	{
-		if ( theGame.GetGameInputValue('GI_Camera_Right') > 0.5f )
-		{
-			ExperiencedGeralt_Camera_Right();
-			thePlayer.AddTimer('ExperiencedGeralt_Timer_Camera_Right', 0.010, true, false);
-		}
-			else
-				thePlayer.RemoveTimer('ExperiencedGeralt_Timer_Camera_Right');
-	}
-	timer function ExperiencedGeralt_Timer_Camera_Up( timeDelta : float )
-	{
-		if ( theGame.GetGameInputValue('GI_Camera_Up') > 0.5f )
-		{
-			ExperiencedGeralt_Camera_Up();
-			thePlayer.AddTimer('ExperiencedGeralt_Timer_Camera_Up', 0.010, true, false);
-		}
-			else
-				thePlayer.RemoveTimer('ExperiencedGeralt_Timer_Camera_Up');
-	}
-	timer function ExperiencedGeralt_Timer_Camera_Down( timeDelta : float )
-	{
-		if ( theGame.GetGameInputValue('GI_Camera_Down') > 0.5f )
-		{
-			ExperiencedGeralt_Camera_Down();
-			thePlayer.AddTimer('ExperiencedGeralt_Timer_Camera_Down', 0.010, true, false);
-		}
-			else
-				thePlayer.RemoveTimer('ExperiencedGeralt_Timer_Camera_Down');
-	}
-	timer function ExperiencedGeralt_Timer_Camera_In( timeDelta : float )
-	{
-		if ( theGame.GetGameInputValue('GI_Camera_In') > 0.5f )
-		{
-			ExperiencedGeralt_Camera_In();
-			thePlayer.AddTimer('ExperiencedGeralt_Timer_Camera_In', 0.010, true, false);
-		}
-			else
-				thePlayer.RemoveTimer('ExperiencedGeralt_Timer_Camera_In');
-	}
-	timer function ExperiencedGeralt_Timer_Camera_Out( timeDelta : float )
-	{
-		if ( theGame.GetGameInputValue('GI_Camera_Out') > 0.5f )
-		{
-			ExperiencedGeralt_Camera_Out();
-			thePlayer.AddTimer('ExperiencedGeralt_Timer_Camera_Out', 0.010, true, false);
-		}
-			else
-				thePlayer.RemoveTimer('ExperiencedGeralt_Timer_Camera_Out');
-	}
-	timer function ExperiencedGeralt_Timer_Camera_FOV_Decrease( timeDelta : float )
-	{
-		if ( theGame.GetGameInputValue('GI_Camera_FOV_Decrease') > 0.5f )
-		{
-			ExperiencedGeralt_Camera_FOV_Decrease();
-			thePlayer.AddTimer('ExperiencedGeralt_Timer_Camera_FOV_Decrease', 0.010, true, false);
-		}
-			else
-				thePlayer.RemoveTimer('ExperiencedGeralt_Timer_Camera_FOV_Decrease');
-	}
-	timer function ExperiencedGeralt_Timer_Camera_FOV_Increase( timeDelta : float )
-	{
-		if ( theGame.GetGameInputValue('GI_Camera_FOV_Increase') > 0.5f )
-		{
-			ExperiencedGeralt_Camera_FOV_Increase();
-			thePlayer.AddTimer('ExperiencedGeralt_Timer_Camera_FOV_Increase', 0.010, true, false);
-		}
-			else
-				thePlayer.RemoveTimer('ExperiencedGeralt_Timer_Camera_FOV_Increase');
-	}
-
-//////////////////////////////////////////////////////////////////////////////////////////
-// ExperiencedGeralt Functions End
-//////////////////////////////////////////////////////////////////////////////////////////
-
 	function SetCombatBlockTriggerActive( val : bool, trigger : CBlockCombatArea )
 	{
 		combatBlockTriggerActive = val;
@@ -3515,7 +3482,7 @@ import class CPlayer extends CActor
 	
 	function KeepCombatMode()
 	{
-		combatMode = 5;
+		combatMode = 3;//===ProjectMersey===
 		theGame.CreateNoSaveLock( 'PlayerInCombat', combatModeSaveLock );
 		
 		if ( thePlayer.AreCombatHotKeysBlocked() ) thePlayer.SetCombatHotKeysBlocked( false );
@@ -3595,7 +3562,7 @@ import class CPlayer extends CActor
 			SetDarkWeaponSilver(false);
 			SetDarkWeaponSteel(false);
 			SetDarkSet(false);		
-			DarkSetEffect();
+			DarkSetEffect();//===ProjectMersey=== - Disable dark effect on full dark armor set - Author: QuietusPlus
 		}
 		else
 		{
@@ -3607,13 +3574,13 @@ import class CPlayer extends CActor
 					{
 						SetDarkWeaponSteel(true);
 						CheckSet(darkItem, thePlayer);
-						DarkSetEffect();
+						DarkSetEffect();//===ProjectMersey=== - Disable dark effect on full dark armor set - Author: QuietusPlus
 					}
 					else if(GetInventory().ItemHasTag(darkItem, 'SilverSword'))
 					{
 						SetDarkWeaponSilver(true);
 						CheckSet(darkItem, thePlayer);
-						DarkSetEffect();
+						DarkSetEffect();//===ProjectMersey=== - Disable dark effect on full dark armor set - Author: QuietusPlus
 					}
 				}
 			}
@@ -3622,7 +3589,7 @@ import class CPlayer extends CActor
 				SetDarkWeaponSilver(false);
 				SetDarkWeaponSteel(false);
 				SetDarkSet(false);
-				DarkSetEffect();
+				DarkSetEffect();//===ProjectMersey=== - Disable dark effect on full dark armor set - Author: QuietusPlus
 			}
 		}
 		// --------------------------------------------------
@@ -4109,15 +4076,7 @@ mBoolean( true ) );
 			level = level + 1;
 			
 			talents = GetTalentPoints();
-			
-			if(level % 2 == 0)
-			{
-				SetTalentPoints( talents + 2 );
-			}
-			else
-			{
-				SetTalentPoints( talents + 1 );
-			}
+			SetTalentPoints( talents + 3 );
 			
 			levelname = StringToName("Level" + level);
 			GetCharacterStats().AddAbility( levelname );
@@ -4283,7 +4242,7 @@ mBoolean( true ) );
 			
 			m_canUseMedallion = false;
 			theHud.m_hud.SetIsMedallionActive( false );
-			AddTimer( 'OnEnableMedallion', 1.5f, false );
+			AddTimer( 'OnEnableMedallion', 1.f, false );//===ProjectMersey===
 			
 			FindPowerPlaces();
 			
@@ -7153,9 +7112,9 @@ thePlayer.RemoveAllBuffs();
 	{
 		var npc : CActor;
 		var currStateName : name;
-	
+		
 		npc = (CNewNPC)enemy;
-				
+		
 		if ( !npc ) return false;
 		
 		currStateName = npc.GetCurrentStateName();
@@ -7173,11 +7132,11 @@ thePlayer.RemoveAllBuffs();
 		var npc : CActor;
 		var currStateName : name;
 		var takedownParams : STakedownParams;
-
+		
 		npc = (CNewNPC)enemy;
 		
 		if ( !npc ) return false;
-				
+		
 		currStateName = npc.GetCurrentStateName();
 
 		if ( currStateName == 'Falter' )
@@ -7357,7 +7316,7 @@ thePlayer.RemoveAllBuffs();
 		}
 		else if(commentaryType == PC_MonsterReaction && !thePlayer.IsNotGeralt())
 		{
-			PlayVoiceset(1, "witcher_alone_enemies_oneliners");
+			PlayVoiceset(1, "witcher_alone_enemies_oneliners");//===ProjectMersey===
 		}
 		else if(commentaryType == PC_ToTeamNearEnemies && !thePlayer.IsNotGeralt())
 		{
@@ -7460,7 +7419,7 @@ thePlayer.RemoveAllBuffs();
 				itemName = StringToName("magic_s" + i + "_2" );
 				if ( thePlayer.GetCharacterStats().HasAbility(itemName) ) thePlayer.GetCharacterStats().RemoveAbility(itemName);
 			}
-		talents = level - 1 + FloorF(level / 2);
+		talents = level - 2;
 	}	
 	function AllowCombatRotation(flag : bool)
 	{
@@ -7601,7 +7560,7 @@ thePlayer.RemoveAllBuffs();
 				if ( !FactsDoesExist('import_item_dyaebl') )
 				{
 					FactsAdd( 'import_item_dyaebl', 1 );
-					Log( "Importing equipped item: D’yaebl " );
+					Log( "Importing equipped item: Dï¿½yaebl " );
 					thePlayer.GetInventory().AddItem(StringToName("Dyaebl"), 1);
 				}
 			}
@@ -7610,7 +7569,7 @@ thePlayer.RemoveAllBuffs();
 				if ( !FactsDoesExist('import_item_ardaenye') )
 				{
 					FactsAdd( 'import_item_ardaenye', 1 );
-					Log( "Importing equipped item: Ard’aenye " );
+					Log( "Importing equipped item: Ardï¿½aenye " );
 					thePlayer.GetInventory().AddItem(StringToName("Ardaenye"), 1);
 				}
 			}
@@ -7632,7 +7591,7 @@ thePlayer.RemoveAllBuffs();
 					thePlayer.GetInventory().AddItem('Moonblade', 1);
 				}
 			}
-			else if ( StrFindFirst( item, "it_stlswd_012" ) != -1 || StrFindFirst( item, "m0_it_stlswd05" ))
+			else if ( StrFindFirst( item, "it_stlswd_012" ) != -1 /*|| StrFindFirst( item, "m0_it_stlswd05" )*/)//ProjectMersey
 			{
 				if ( !FactsDoesExist('import_item_mahakamanrunesihil') )
 				{
@@ -7810,13 +7769,17 @@ thePlayer.RemoveAllBuffs();
 
 /////////////////////// DLC ///////////////////////////////////
 
+	//===ProjectMersey=== - Disable all DLC gear from being automatically added to inventory
 	event OnDlc_roche_jacket()
 	{
+		/*
 		GetInventory().AddItem( 'Roche Commando Jacket', 1, true );
+		*/
 	}
 	
 	event OnDlc_alchemy_suit()
 	{
+		/*
 		GetInventory().AddItem( 'Herbalist Gloves', 1, true );
 		
 		//GetInventory().AddItem( 'White Myrtle Petals', 15, true ); jaskolcze ziele, przestep, tegoskor
@@ -7828,20 +7791,24 @@ thePlayer.RemoveAllBuffs();
 		//GetInventory().AddItem( 'Bryony', 10, true );
 		GetInventory().AddItem( 'Verbena', 8, true );
 		GetInventory().AddItem( 'Balisse', 8, true );
+		*/
 	}
 
 	event OnDlc_magical_suit()
 	{
+		/*
 		GetInventory().AddItem( 'Unique Essenced Pants', 1, true );
 		
 		GetInventory().AddItem( 'Rune of Sun', 1, true );
 		GetInventory().AddItem( 'Rune of Earth', 1, true );
 		GetInventory().AddItem( 'Rune of Moon', 1, true );
 		GetInventory().AddItem( 'Rune of Fire', 1, true );
+		*/
 	}
 	
 	event OnDlc_swordsman_suit()
 	{
+		/*
 		GetInventory().AddItem( 'Unique Whetstone', 10, true );
 		
 		GetInventory().AddItem( 'Brown Oil', 4, true );
@@ -7852,6 +7819,7 @@ thePlayer.RemoveAllBuffs();
 		GetInventory().AddItem( 'Cerbin Blath', 4, true );
 		GetInventory().AddItem( 'Surge', 4, true );
 		//GetInventory().AddItem( 'Argentia', 4, true );
+		*/
 	}
 	
 	event OnDlc_troll()

@@ -2,7 +2,7 @@
 /** Witcher Script file
 /***********************************************************************/
 /** Object classes exprots
-/** Copyright © 2009 Dexio's Late Night R&D Home Center
+/** Copyright ï¿½ 2009 Dexio's Late Night R&D Home Center
 /***********************************************************************/
 
 /////////////////////////////////////////////
@@ -22,7 +22,7 @@ state Cutscene in CPlayer extends Base
 		theHud.SetHudVisibility( "false" );
 		super.OnEnterState();
 		theGame.EnableButtonInteractions( false );
-		thePlayer.ResetPlayerMovement();
+		//thePlayer.ResetPlayerMovement();//===ProjectMersey===
 		
 		parent.LockButtonInteractions();
 		
@@ -50,7 +50,7 @@ state Cutscene in CPlayer extends Base
 		
 		theGame.EnableButtonInteractions( true );
 		super.OnLeaveState();
-		thePlayer.ResetPlayerMovement();
+		//thePlayer.ResetPlayerMovement();//===ProjectMersey===
 		if(wasDarkEffectSilver)
 		{
 			wasDarkEffectSilver = false;
@@ -60,8 +60,7 @@ state Cutscene in CPlayer extends Base
 		{
 			wasDarkEffectSteel = false;
 			thePlayer.SetDarkWeaponSteel( true );
-		}
-		
+		}	
 	}
 	
 	event OnLeavingState()

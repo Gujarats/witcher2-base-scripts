@@ -45,7 +45,7 @@ state Burned in CRotfiendNest
 		theGame.CreateNoSaveLock( "sq203_rotfiend_nests", saveLockNum );
 		
 		thePlayer.SetManualControl(false, true);
-		thePlayer.ResetPlayerMovement();
+		//thePlayer.ResetPlayerMovement();//===ProjectMersey===
 		
 		if(thePlayer.GetCurrentPlayerState() == PS_Exploration)
 		{
@@ -80,7 +80,7 @@ state Burned in CRotfiendNest
 		
 		theGame.ReleaseNoSaveLock( saveLockNum );
 		thePlayer.SetManualControl(true, true);
-		thePlayer.ResetPlayerMovement();
+		//thePlayer.ResetPlayerMovement();//===ProjectMersey===
 		thePlayer.SetAllPlayerStatesBlocked( false );
 		thePlayer.UnblockAllPlayerStates();
 		thePlayer.EnableMeditation( true );

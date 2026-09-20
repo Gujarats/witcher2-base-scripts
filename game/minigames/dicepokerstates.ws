@@ -2,7 +2,7 @@
 /** Witcher Script file
 /***********************************************************************/
 /** Dice Poker Minigame
-/** Copyright © 2010 CD Projekt RED
+/** Copyright ï¿½ 2010 CD Projekt RED
 /***********************************************************************/
 
 state InitializeGUI in W2MinigameDicePoker
@@ -62,7 +62,7 @@ state PlayerSelect in W2MinigameDicePoker
 
 		parent.SelectAllDices( DicePoker_Player, false );
 
-		parent.CameraTop();
+		parent.CameraTop();//===ProjectMersey=== - Dice camera fix - Author: XZINED
 
 		parent.StartPlayerSelection();
 	}
@@ -140,7 +140,7 @@ state PlayerBetting in W2MinigameDicePoker
 		if( firstBet )
 		{
 			minimalBet = Min( parent.m_npc.GetDicePokerMinBet(), parent.m_playerStatuses[ DicePoker_Player ].m_money );
-			maximalBet = Min( parent.m_npc.GetDicePokerMaxBet(), parent.m_playerStatuses[ DicePoker_Player ].m_money );
+			maximalBet = Min( 100, parent.m_playerStatuses[ DicePoker_Player ].m_money );
 			parent.m_guiPanel.Betting( maximalBet, minimalBet,
 				"[[locale.dice.PlaceYourBet]]", "[[locale.dice.Bet]]", "[[locale.dice.Pass]]" );
 		}
@@ -230,7 +230,7 @@ state PlayerThrowing in W2MinigameDicePoker
 {
 	entry function StatePlayerThrowing()
 	{
-		parent.CameraTop();
+		parent.CameraTop();//===ProjectMersey=== - Dice camera fix - Author: XZINED
 		
 		if( theGame.IsUsingPad() )
 		{

@@ -358,11 +358,9 @@ import class CGuiUtils extends CObject
 			
 			if ( itemId == inventory.GetItemId('Respec') ) {
 				theHud.SetString( "DescFull", GetLocStringByKeyExt( "x_tut61_title" ) + descFull + "<br>" + fullDescTootlip, AS_item );
-			} 
-			else if ( itemTags.Contains('NoTooltip') ) {
+			} else if ( itemTags.Contains('NoTooltip') ) {
 				theHud.SetString( "DescFull", fullDescTootlip, AS_item );
-			}
-			 else{
+			} else {
 				theHud.SetString( "DescFull", GetLocStringByKeyExt( "Tooltip" + itemName ) + descFull + "<br>" + fullDescTootlip, AS_item );
 			}
 		}
@@ -1081,7 +1079,7 @@ import class CGuiUtils extends CObject
 		var itemTags : array< name >;
 		
 		inv.GetItemNameTags( itemName, itemTags );
-				
+		
 		// quest items are priceless
 		if( ! itemTags.Contains( 'Special' ) )
 		{
@@ -1169,11 +1167,13 @@ import class CGuiUtils extends CObject
 		
 		if ( inv == thePlayer.GetInventory() )
 		{
-			return (1 + RoundFEx(item_price / 10));
+		    if (itemTags.Contains( 'AlchemyIngridient' ) && (item_price <= 100)) item_price = item_price / 2.5;
+			item_price = item_price / 2.5;
+			return (RoundFEx(item_price));//===ProjectMersey===
 		} 
 		else
 		{
-			return RoundFEx((item_price * 2.5) * multi + 1);
+			return RoundFEx((item_price * 2.5) * multi);//===ProjectMersey=== - Price fix
 		}
 	}
 /*

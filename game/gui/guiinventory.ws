@@ -3,7 +3,7 @@
 /** Witcher Script file
 /***********************************************************************/
 /** Inventory gui panel
-/** Copyright © 2010 CD Projekt Red.
+/** Copyright ï¿½ 2010 CD Projekt Red.
 /***********************************************************************/
 
 class CGuiInventory extends CGuiPanel
@@ -183,6 +183,7 @@ class CGuiInventory extends CGuiPanel
 		if ( itemName == 'Glossary Order of the Flaming Rose' )   
 		{ 
 			thePlayer.AddJournalEntry( JournalGroup_Glossary, "Zakon Plonacej Rozy", "Zakon Plonacej Rozy 0",  "Politics", "glossariusz_256x256" ); 
+			thePlayer.AddJournalEntry( JournalGroup_Glossary, "Zakon Plonacej Rozy", "Zakon Plonacej Rozy 1",  "Politics", "glossariusz_256x256" );//===ProjectMersey===
 			thePlayer.AddJournalEntry( JournalGroup_Glossary, "Jakub de Aldersberg", "Jakub de Aldersberg 0",  "Politics", "glossariusz_256x256" );
 		}
 		if ( itemName == 'Glossary Witchers' )   

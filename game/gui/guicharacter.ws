@@ -2,7 +2,7 @@
 /** Witcher Script file
 /***********************************************************************/
 /** Character gui panel
-/** Copyright © 2010
+/** Copyright ï¿½ 2010
 /***********************************************************************/
 
 enum EDisplayPercType
@@ -239,9 +239,9 @@ class CGuiCharacter extends CGuiPanel
 		talentsSpentAlche = ListTreeSkills( stats, "SkillsTreeAlchemy",		"alchemy",	4, 2 );
 		
 		theHud.SetBool( "SkillsTreeTrainingAvailable",	true,					AS_character );
-		theHud.SetBool( "SkillsTreeMagicAvailable",		talentsSpentTrain >= 6,	AS_character );
-		theHud.SetBool( "SkillsTreeSwordsAvailable",	talentsSpentTrain >= 6,	AS_character );
-		theHud.SetBool( "SkillsTreeAlchemyAvailable",	talentsSpentTrain >= 6,	AS_character );
+		theHud.SetBool( "SkillsTreeMagicAvailable",		true,					AS_character );//===ProjectMersey===
+		theHud.SetBool( "SkillsTreeSwordsAvailable",	true,					AS_character );//===ProjectMersey===
+		theHud.SetBool( "SkillsTreeAlchemyAvailable",	true,					AS_character );//===ProjectMersey===
 		
 		//                                               treeId, max allowed level, the number of skills
 		ListStorySkills( stats, "QuestSkills",	"story", 5,      3,                 32 );
@@ -492,6 +492,13 @@ class CGuiCharacter extends CGuiPanel
 				if ( ! stats.IsAbilityDefined( levelN ) )
 					break;
 				
+				//===ProjectMersey=== BEGIN - Display level 2 descriptions and mutagen slots on unaquired skills - Author: QuietusPlus
+				/*
+				if ( stats.HasAbility( levelN ) )	playerLevel = 1;
+				else								playerLevel = 0;
+				*/
+				//===ProjectMersey=== END - Display level 2 descriptions and mutagen slots on unaquired skills - Author: QuietusPlus
+
 				AS_skill = theHud.CreateAnonymousObject();
 				
 				//theHud.SetFloat( "MaxMutations", stats.GetMaxEnhancementsForAbility( levelN ), AS_skill );
@@ -499,13 +506,22 @@ class CGuiCharacter extends CGuiPanel
 				
 				AS_descrArr = theHud.CreateArray( "LvlDesc", AS_skill );
 				
-				if ( stats.HasAbility( levelN ) ) {
+				//===ProjectMersey=== BEGIN - Display level 2 descriptions and mutagen slots on unaquired skills - Author: QuietusPlus
+				/*
+				theHud.PushString( AS_descrArr, GetSkillTreeDescription( levelS + "_description" ) );
+				*/
+				if ( stats.HasAbility( levelN ) )
+				{
 					playerLevel = 1;
 					theHud.PushString( AS_descrArr, GetSkillTreeDescription( levelS + "_description" ) );
-				} else {
+				}
+				else
+				{
 					playerLevel = 0;
 					theHud.PushString( AS_descrArr, GetSkillTreeDescription( levelS + "_description" ) + "<br/><br/><p align='left'><font face='Font_Style_Standard' size='14' color='#979580'><b>" + GetLocStringByKeyExt("[[locale.char.pclevel]]") + " 2</b></font></p>" + GetSkillTreeDescription( levelS + "_2_description" ) );
 				}
+				//===ProjectMersey=== END - Display level 2 descriptions and mutagen slots on unaquired skills - Author: QuietusPlus
+
 
 				maxLevel = 1;
 				for ( j = 2; true; j += 1 )
@@ -523,10 +539,22 @@ class CGuiCharacter extends CGuiPanel
 						playerLevel = j;
 				}
 				
+				//===ProjectMersey=== BEGIN - Display level 2 descriptions and mutagen slots on unaquired skills - Author: QuietusPlus
+				/*
+				if ( playerLevel == 0 )
+				{
+					mutagentsSlotsNum = 0;
+				}
+				else if ( playerLevel == 1 && mutagentsSlotsNum > 1 )
+				{
+					mutagentsSlotsNum = 1;
+				}
+				*/
 				if ( mutagentsSlotsNum > 1 )
 				{
 					mutagentsSlotsNum = 1;
 				}
+				//===ProjectMersey=== END - Display level 2 descriptions and mutagen slots on unaquired skills - Author: QuietusPlus
 				theHud.SetFloat( "MaxMutations", mutagentsSlotsNum, AS_skill );
 				
 				

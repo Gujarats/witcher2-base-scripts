@@ -470,7 +470,7 @@ quest function SetMaxMoveSpeedTypeQuest( moveType : EMoveType, formationFollower
 	}
 }
 
-//Funkcja do sprawdzania iloœci zabitych wrogów w scenie
+//Funkcja do sprawdzania iloï¿½ci zabitych wrogï¿½w w scenie
 
 latent quest function QuestCheckDeadCount( tag : name, deadCount : int ) : bool
 {
@@ -485,7 +485,7 @@ latent quest function QuestCheckDeadCount( tag : name, deadCount : int ) : bool
 	}
 }
 
-//funkcja sprawdzaj¹ca iloœæ pokonanych postaci w walce na pieœci
+//funkcja sprawdzajï¿½ca iloï¿½ï¿½ pokonanych postaci w walce na pieï¿½ci
 
 latent quest function QuestCheckUnconciousCount( tag : name, unconciousCount : int ) : bool
 {
@@ -500,7 +500,7 @@ latent quest function QuestCheckUnconciousCount( tag : name, unconciousCount : i
 	}
 }
 
-//funkcja sprawdzaj¹ca czy dana postaæ ¿yje, funkcja sptrawdza to tylko raz i wypuszcza sygna³
+//funkcja sprawdzajï¿½ca czy dana postaï¿½ ï¿½yje, funkcja sptrawdza to tylko raz i wypuszcza sygnaï¿½
 
 quest function QuestCheckIfIsAlive( tag: name ) : bool 
 {
@@ -510,7 +510,7 @@ quest function QuestCheckIfIsAlive( tag: name ) : bool
 	return targetActor.IsAlive();
 }
 
-//funkcja sprawdzaj¹ca godzinê
+//funkcja sprawdzajï¿½ca godzinï¿½
 
 quest function QuestCheckTime( from_hour: int, to_hour: int ) : bool 
 {
@@ -526,7 +526,7 @@ quest function QuestCheckTime( from_hour: int, to_hour: int ) : bool
 	return false;
 }
 
-//Funkcja zak³adaj¹ca graczowi tryb chodzenia, oraz zdejmuj¹ca go jak chcemy 
+//Funkcja zakï¿½adajï¿½ca graczowi tryb chodzenia, oraz zdejmujï¿½ca go jak chcemy 
 
 quest function QSetPlayerWalkMode ( IsWalking: bool ) : bool
 {	
@@ -561,7 +561,7 @@ quest function QBlockFastMenu ( BlockFastMenu: bool )
 	LogChannel( 'GUI', "QBlockFastMenu: " + BlockFastMenu );
 }
 
-//Funkcja sprawdzaj¹ca czy gracz jest w combat mode
+//Funkcja sprawdzajï¿½ca czy gracz jest w combat mode
 
 quest function QCheckCombatMode () : bool
 {
@@ -665,7 +665,7 @@ quest function QDestroyAllNPCWithTag( targetTag : name ) : bool
 
 
 
-//funkcja w³¹czaj¹ca i wy³¹czaj¹ca eksploracjê
+//funkcja wï¿½ï¿½czajï¿½ca i wyï¿½ï¿½czajï¿½ca eksploracjï¿½
 
 quest function QEnableComponent ( shouldBeEnabled : bool, objectTag : name, componentName : string) : bool
 {
@@ -695,7 +695,7 @@ quest function QEnableComponent ( shouldBeEnabled : bool, objectTag : name, comp
 	return true;
 }
 
-//Funkcja w której postaæ mo¿e nosiæ drug¹ postaæ do okreœlonego punktu
+//Funkcja w ktï¿½rej postaï¿½ moï¿½e nosiï¿½ drugï¿½ postaï¿½ do okreï¿½lonego punktu
 latent quest function QNPCStartsCarryingNPC( carrierTag, carriedTag, masterBehaviorName, slaveBehaviorName, DestinationTag : name,
 											latentAction : IActorLatentAction ) : bool
 {
@@ -747,7 +747,7 @@ latent function InteractionNpcMaster( masterTag, slavesTag, masterBehaviorName, 
 	return true;
 }
 
-//Funkcja ka¿¹ca postaci iœæ do punktu, funkcja oczekuje na to a¿ NPc dojdzie do punktu
+//Funkcja kaï¿½ï¿½ca postaci iï¿½ï¿½ do punktu, funkcja oczekuje na to aï¿½ NPc dojdzie do punktu
 
 latent quest function QMoveToObjectUntilReached( DestinationTag : name, ActorTag: name, moveType : EMoveType, speed : float ) : bool
 {
@@ -797,7 +797,7 @@ latent quest function QDelay( Duration : float ) : bool
 	return true;
 }
 
-//PW: F-kcja ka¿¹ca postaci iœæ do punktu, funkcja nie oczekuje na to a¿ NPc dojdzie do punktu
+//PW: F-kcja kaï¿½ï¿½ca postaci iï¿½ï¿½ do punktu, funkcja nie oczekuje na to aï¿½ NPc dojdzie do punktu
 
 latent quest function QMoveToObject( DestinationTag : name, ActorTag: name, moveType : EMoveType, speed : float, exitWorkMode : EExitWorkMode  ) : bool
 {
@@ -824,7 +824,7 @@ latent quest function QMoveToObject( DestinationTag : name, ActorTag: name, move
 	return true; 
 }
 
-//Funkcja wy³aczaj¹ca wandering
+//Funkcja wyï¿½aczajï¿½ca wandering
 //obsolete
 latent quest function QTurnOffWandering ( ActorTag: name, Wandering: bool) : bool
 {
@@ -1225,7 +1225,7 @@ latent quest function Qq105_StartBossFight ( Tentadrake : CEntityTemplate ): boo
 	return true;
 }
 
-// Funkcja dodaj¹ca wpis do bazy faktów
+// Funkcja dodajï¿½ca wpis do bazy faktï¿½w
 
 quest function QAddFact ( Fact_ID : name, Fact_Value : int, Valid_for : int, time : int) : bool
 {
@@ -1240,7 +1240,7 @@ quest function QAddFact ( Fact_ID : name, Fact_Value : int, Valid_for : int, tim
 	return true;
 }
 
-//Funckja sprawdzaj¹ca wpis w bazie faktów
+//Funckja sprawdzajï¿½ca wpis w bazie faktï¿½w
 
 quest function QCheck_if_Fact_exist ( Fact_ID : name, Fact_Value : int) : bool
 {
@@ -1356,7 +1356,7 @@ quest function QUnBlockAllPlayerState() : bool
 	thePlayer.UnblockAllPlayerStates();
 }
 
-//PW: f-kcja obs³uguj¹ca scenê pogoni za celem
+//PW: f-kcja obsï¿½ugujï¿½ca scenï¿½ pogoni za celem
 quest function QSetSceneChaseSequence ( ChasersTag : array<name>, VictimTag : name, timeout : float ) : bool
 {
 	var Chasers : array<CNewNPC>;
@@ -1383,7 +1383,7 @@ quest function QSetSceneChaseSequence ( ChasersTag : array<name>, VictimTag : na
 	return true;
 }
 
-//funkcja w³¹czajaca i wy³¹czaj¹ca medytacjê 
+//funkcja wï¿½ï¿½czajaca i wyï¿½ï¿½czajï¿½ca medytacjï¿½ 
 
 quest function QBlockMeditaction ( isBlocked : bool ) : bool
 {
@@ -1445,7 +1445,7 @@ latent quest function QMoveToObjectMultipleActors ( DestinationTag : name, Actor
 	return true; 
 }
 
-// Funkcja wy³¹czaj¹ca/wlaczajaca Sneak Mode
+// Funkcja wyï¿½ï¿½czajï¿½ca/wlaczajaca Sneak Mode
 quest function QSneakModeOff ( sneakMode : bool ) : bool
 {
 	var geralt : CPlayer;
@@ -1459,7 +1459,7 @@ quest function QSneakModeOff ( sneakMode : bool ) : bool
 	return true;
 }
 
-// Funkcja za³¹czaj¹ca dany stan obiektowi fizycznemu - niszczenie
+// Funkcja zaï¿½ï¿½czajï¿½ca dany stan obiektowi fizycznemu - niszczenie
 
 //PW: f-kcja do odpalania eventu animacji z behaviora na NPCu
 quest function QSceneRaiseAnimationEvent ( actorTag : name, behaviorGraphName : name, eventName : name, force : bool) : bool
@@ -1610,7 +1610,7 @@ latent quest function QCSclearText () : bool
 	return true;
 }
 
-//PW: f-kcja do zbierania aktorów i ustawiania ich na leadera z POIT. Nie wa¿ne, nie patrz na to.
+//PW: f-kcja do zbierania aktorï¿½w i ustawiania ich na leadera z POIT. Nie waï¿½ne, nie patrz na to.
 latent quest function QGatherActorsMoveWithLead ( destinationTag : name, actorsTag: array<name>, leaderTag: name, actorSearchRange : float, poit : EPointOfInterestType, radius, leadTimeout : float, actorsTimeout : float, observePOIT : bool ) : bool
 {
 	var actors: array<CActor>;
@@ -1908,7 +1908,7 @@ quest function QGiveItemInScene( giverTag: name, receiverTag : name, itemName : 
 	
 	return true;
 }
-//Funkcja która pozwala na zabranie lub oddanie itemu NPC-owi
+//Funkcja ktï¿½ra pozwala na zabranie lub oddanie itemu NPC-owi
 quest function QGetWeaponFromNPC ( actorTag : name, containerTag : name, remove : bool) : bool
 
 {
@@ -1971,7 +1971,7 @@ quest function QGetWeaponFromNPC ( actorTag : name, containerTag : name, remove 
 	return true;
 }
 
-//funkcja pozwalaj¹ca na ustawianie stanu bodypartów
+//funkcja pozwalajï¿½ca na ustawianie stanu bodypartï¿½w
 quest function QSetBodyPartState ( targetTag : name, bodyPartName : name, bodyPartState : name, optional applyNow : bool) : bool
 {
 	var entity : CEntity;
@@ -2008,7 +2008,7 @@ quest function QChangeCombatToSteel()
 	thePlayer.ChangePlayerState( PS_CombatSteel );
 }
 
-//funkcja pozwalajaæa na dodanie itemu do containera
+//funkcja pozwalajaï¿½a na dodanie itemu do containera
 quest function QAddItemToContainer ( itemName : name, containerTag : name, quantity : int) : bool
 {
 	var inv 	   :  CInventoryComponent;
@@ -2110,7 +2110,7 @@ quest function QSetGeraltNaked() : bool
 	
 	return true;
 }
-//Funkcja pozwalaj¹ca na rzucenie entity w zdefiniowany cel
+//Funkcja pozwalajï¿½ca na rzucenie entity w zdefiniowany cel
 quest function QThrowObject ( objectTag : name, targetTag : name, angleInDegrees : float, multiplier : float ) : bool 
 {
 	var target : CNode;
@@ -2136,7 +2136,7 @@ quest function QTempStun ( actorTag: name ) : bool
 	return true;
 }
 
-//PW: f-kcja do wrzucania lub zrzucania ze stosu behavior grafów na postaci
+//PW: f-kcja do wrzucania lub zrzucania ze stosu behavior grafï¿½w na postaci
 quest function QPushOrPopBehaviorGraph ( actorTag : name, behaviorGraphName : name, push : bool) : bool
 {
 	var actor : CActor;
@@ -2156,7 +2156,7 @@ quest function QPushOrPopBehaviorGraph ( actorTag : name, behaviorGraphName : na
 	return true;
 }
 
-//PW: f-kcja do tworzenia entity dynamicznie - mo¿na podawaæ pozycjê z palca lub wzglêdem node'a
+//PW: f-kcja do tworzenia entity dynamicznie - moï¿½na podawaï¿½ pozycjï¿½ z palca lub wzglï¿½dem node'a
 quest function QCreateEntityInScene ( entityTemplate : CEntityTemplate, position : Vector, optional rotation : EulerAngles,
 										orPositionFromWpTag : name, optional optionalUseAppearancesFromIncludes : bool, optional optionalForceBehaviorPose : bool ) : bool
 {
@@ -2179,7 +2179,7 @@ quest function QCreateEntityInScene ( entityTemplate : CEntityTemplate, position
 	return true;
 }
 
-//PW: f-kcja do ustawiania Idle'a na postaci w zasiêgu actorSearchRange
+//PW: f-kcja do ustawiania Idle'a na postaci w zasiï¿½gu actorSearchRange
 quest function QSetIdleInRange ( centerPointTag : name, actorSearchRange : float, actorsTag : array<name>) : bool
 {
 	var npcs 		: array<CActor>;
@@ -2215,7 +2215,7 @@ quest function QSetIdleInRange ( centerPointTag : name, actorSearchRange : float
 }
 
 // PW: f-kcja do niszczenia \m/
-// pozwala zrobiæ test, czy layer na którym jest obiekt nie zosta³ od³adowany - najczêstsza przyczyna nie dzia³ania destroya
+// pozwala zrobiï¿½ test, czy layer na ktï¿½rym jest obiekt nie zostaï¿½ odï¿½adowany - najczï¿½stsza przyczyna nie dziaï¿½ania destroya
 quest function QDestroyObject ( nodeTag : name, debugLayerGroupName : string ) : bool
 {
 	var node 	 : array <CNode>;
@@ -2251,7 +2251,7 @@ quest function QDestroyObject ( nodeTag : name, debugLayerGroupName : string ) :
 	return true;
 }
 
-// MT: funkcja w³¹czaj¹ca/wy³¹czaj¹ca p³on¹ce przeszkody
+// MT: funkcja wï¿½ï¿½czajï¿½ca/wyï¿½ï¿½czajï¿½ca pï¿½onï¿½ce przeszkody
 quest function QActivateBurningObstacle ( targetTag : name, enable : bool ) : bool
 {
 	var targets : array<CNode>;
@@ -2281,7 +2281,7 @@ quest function QActivateBurningObstacle ( targetTag : name, enable : bool ) : bo
 	}
 }
 
-//Funkcja w której gracz mo¿e nosiæ postaæ
+//Funkcja w ktï¿½rej gracz moï¿½e nosiï¿½ postaï¿½
 latent quest function QScenePlayerStartsCarryingNPC( carriedTag, masterBehaviorName, slaveBehaviorName : name, drawWeapon : bool ) : bool
 {
 	var result : bool;
@@ -2339,7 +2339,7 @@ quest latent function QInteractionPlayerMasterStop( carryTransitionMode : W2Carr
 
 ///////////////////////////////////// SOUND FUNCTIONS /////////////////////////////////////////////
 
-// Funkcja startuj¹ca muzyczny motyw
+// Funkcja startujï¿½ca muzyczny motyw
 quest function QPlayMusic( cueName : name ) : bool
 {
 	theSound.PlayMusic( cueName );
@@ -2352,7 +2352,7 @@ quest function QSetMusicVolume( dbVolume : float )
 	theSound.SetMusicVolume( dbVolume );
 }
 
-// Funkcja zatrzymuj¹ca motyw muzyczny
+// Funkcja zatrzymujï¿½ca motyw muzyczny
 quest function QStopMusic( cueName : string )
 {
 	theSound.StopMusic( cueName );
@@ -2481,7 +2481,7 @@ quest function QResetPlayerCamera() : bool
 		return true;
 	}
 	
-//Funkcja pozwalaj¹ca na za³adowanie lub od³adowanie grupu warstw
+//Funkcja pozwalajï¿½ca na zaï¿½adowanie lub odï¿½adowanie grupu warstw
 
 quest function QManageLayerGroup ( path : string, load : bool ): bool
 {
@@ -2497,7 +2497,7 @@ quest function QManageLayerGroup ( path : string, load : bool ): bool
 	return true;
 }
 
-//Funkcja pozwalaj¹ca na raisowanie eventów behaviorowych w scenie
+//Funkcja pozwalajï¿½ca na raisowanie eventï¿½w behaviorowych w scenie
 
 quest function Qq000Trebuchet ( trebuchet: name, fire : bool, stop : bool, load : bool) : bool
 {
@@ -2525,7 +2525,7 @@ quest function Qq000Trebuchet ( trebuchet: name, fire : bool, stop : bool, load 
 	return true;
 }
 
-//Funkcja uruchamiaj¹ca chodzenie po œcie¿ce
+//Funkcja uruchamiajï¿½ca chodzenie po ï¿½cieï¿½ce
 
 latent quest function QMoveAlongPathInScene( npcTag : name, pathTag : name, upThePath, fromBegining : bool, margin, speed : float, moveType : EMoveType) : bool
 {
@@ -2555,7 +2555,7 @@ latent quest function QMoveAlongPathInScene( npcTag : name, pathTag : name, upTh
 	return true;
 }
 
-//Funkcja uruchamiaj¹ca chodzenie po œcie¿ce, trzyma sygnal do momentu gdy postac dojdzie
+//Funkcja uruchamiajï¿½ca chodzenie po ï¿½cieï¿½ce, trzyma sygnal do momentu gdy postac dojdzie
 
 latent quest function QMoveAlongPathUntilReached( npcTag : name, pathTag : name, destinationTag : name, upThePath, fromBegining : bool, margin, speed : float, moveType : EMoveType, optional exitWorkFast : bool ) : bool
 {
@@ -2651,7 +2651,7 @@ latent quest function QCheckIfTorchOn ( ObjectTag : name, LightAreaIsOn : bool, 
 	}
 }
 
-// Funkcja zak³adaj¹ca fomracjê w scenie
+// Funkcja zakï¿½adajï¿½ca fomracjï¿½ w scenie
 quest function QSetFormation ( FormationLeaderTag : name, formationFollowerTags : array<name>, formationType : EFormationType, noCombat : bool ) : bool
 {
 	return true;
@@ -3182,7 +3182,7 @@ return true;
 quest function QBlockPlayer(blockPlayer : bool, freeCamera : bool) : bool
 {
 	thePlayer.SetManualControl(!blockPlayer, freeCamera);
-	thePlayer.ResetPlayerMovement();
+	//thePlayer.ResetPlayerMovement();//===ProjectMersey===
 	
 	return true;
 	
@@ -6377,6 +6377,7 @@ quest function QDropFromDraug()
 	thePlayer.GetInventory().AddItem('Piece of Draug armor');
 	thePlayer.GetInventory().AddItem('Mystic Armor Enhancement');
 	thePlayer.GetInventory().AddItem('Draug Trophy');
+	thePlayer.GetInventory().AddItem('Draug Testimony');//===ProjectMersey===
 
 	if( loss > 50) thePlayer.GetInventory().AddItem('Red meteorite ore');
 	if( loss > 60) thePlayer.GetInventory().AddItem('Yellow meteorite ore');
@@ -7381,7 +7382,7 @@ quest latent function GPlayMovieWithDescription( videoName : string, headlineTex
 	//args.PushBack( FlashValueFromFloat( textFadeOut ));
 	
 	theHud.m_hud.HideTutorial();
-	thePlayer.ResetPlayerMovement();
+	//thePlayer.ResetPlayerMovement();//===ProjectMersey===
 	//theHud.InvokeManyArgs( "USMSubtitles", args );
 	
 	if ( afterTime > 0 ) 

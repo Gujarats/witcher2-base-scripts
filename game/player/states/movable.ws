@@ -18,7 +18,10 @@ import state Movable in CPlayer extends Base
 	default				m_scheduledState				= PS_None;
 	
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	
+	//1.2.1
+	private var bFastMove : bool;
+	private var moveSpeedTime : EngineTime;
+
 	event OnEnterState()
 	{
 		// Pass to base class
@@ -26,7 +29,7 @@ import state Movable in CPlayer extends Base
 				
 		// Intall movement timer
 		parent.AddTimer( 'ProcessMovement', 0.001, true, false, TICK_PrePhysics );
-		
+
 		parent.SetManualControl( true, true );
 		
 		// set the state change flags
@@ -39,8 +42,8 @@ import state Movable in CPlayer extends Base
 		var agent : CMovingAgentComponent = parent.GetMovingAgentComponent();
 		
 		// Remove movement timer
-		parent.RemoveTimer( 'ProcessMovement', TICK_PrePhysics );		
-		
+		parent.RemoveTimer( 'ProcessMovement', TICK_PrePhysics );
+
 		// Pass to base class
 		super.OnLeaveState();
 		
@@ -63,7 +66,23 @@ import state Movable in CPlayer extends Base
 		
 	event OnGameInputEvent( key : name, value : float )
 	{
-		if( key == 'GI_WalkFlag' && value > 0.5f )
+		if( key == 'GI_WalkSwitch' && parent.GetCurrentStateName() == 'Exploration' )
+		{
+			if( value > 0.5f )
+			{
+				moveSpeedTime = theGame.GetEngineTime() + 0.3;
+			}
+			else if( theGame.GetEngineTime() < moveSpeedTime )
+			{
+				bFastMove = !bFastMove;
+				if( bFastMove )
+					parent.SetAnimationTimeMultiplier(1.50);
+				else
+					parent.SetAnimationTimeMultiplier(1.15f);
+				return true;
+			}
+		}
+		else if( key == 'GI_WalkFlag' && value > 0.5f )
 		{
 			parent.SwitchWalkFlag();
 			return true;
@@ -73,7 +92,7 @@ import state Movable in CPlayer extends Base
 			//return true if the input have been processed and we dont want to pass it further
 			return true;
 		}
-		
+
 		// Not handled
 		return false;
 	}
@@ -261,7 +280,7 @@ import state Movable in CPlayer extends Base
 				}
 			}
 		}
-		 theCamera.SetZoom(parent.cameraFurtherCurrent);
+		theCamera.SetZoom(parent.cameraFurtherCurrent);
 
 		// send camera pos/rot data to hud (not at every frame)
 		if (theCamera.GetHudDataDelay() <= 0.0)

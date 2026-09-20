@@ -2,7 +2,7 @@
 /** Witcher Script file
 /***********************************************************************/
 /** GUI Elixirs
-/** Copyright © 2010
+/** Copyright ï¿½ 2010
 /***********************************************************************/
 
 class CGuiElixirs extends CGuiPanel
@@ -183,6 +183,7 @@ class CGuiElixirs extends CGuiPanel
 					
 			if ( itemId == thePlayer.GetInventory().GetItemId('Respec') ) {
 				thePlayer.ClearBuild();
+				thePlayer.ResetStats(); //  retain training abilities
 			}
 			
 			theHud.m_utils.AddItemToBag( itemId );

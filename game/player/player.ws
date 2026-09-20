@@ -1104,8 +1104,8 @@ import class CPlayer extends CActor
 		//===ProjectMersey END=== - Disable dark effect on full dark armor set - Author: QuietusPlus
 	}
 	function SetDarkWeaponSteel( val : bool )  		 
-	{ 
-		darkWeaponSteel = val; 
+	{
+		darkWeaponSteel = val;
 		//===ProjectMersey=== BEGIN - Disable dark effect on full dark armor set - Author: QuietusPlus
 		/*
 		if(val)
@@ -4058,6 +4058,18 @@ mBoolean( true ) );
 	function SetBasicAbility()
 	{
 		GetCharacterStats().AddAbility('Witcher Default');
+		GetCharacterStats().AddAbility('training_s1');
+		GetCharacterStats().AddAbility('training_s1_2');
+		GetCharacterStats().AddAbility('training_s2');
+		GetCharacterStats().AddAbility('training_s2_2');
+		GetCharacterStats().AddAbility('training_s3');
+		GetCharacterStats().AddAbility('training_s3_2');
+		GetCharacterStats().AddAbility('training_s4');
+		GetCharacterStats().AddAbility('training_s4_2');
+		GetCharacterStats().AddAbility('training_s5');
+		GetCharacterStats().AddAbility('training_s5_2');
+		GetCharacterStats().AddAbility('training_s6');
+		GetCharacterStats().AddAbility('training_s6_2');
 	}
 	
 	// EXPERIENCE AND TALENT POINTS
@@ -7419,7 +7431,7 @@ thePlayer.RemoveAllBuffs();
 				itemName = StringToName("magic_s" + i + "_2" );
 				if ( thePlayer.GetCharacterStats().HasAbility(itemName) ) thePlayer.GetCharacterStats().RemoveAbility(itemName);
 			}
-		talents = level - 2;
+		talents = (level - 1) * 2; // during respect keep +2 talents acquired from level up
 	}	
 	function AllowCombatRotation(flag : bool)
 	{

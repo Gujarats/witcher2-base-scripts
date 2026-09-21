@@ -1,7 +1,11 @@
 ///////////////////////////////////
 // 		  CONTAINER CLASS        //
 ///////////////////////////////////
-
+//modifications by QuietusPlus, slight additional modifications by JPTiger
+// returns the maximum load (max weight that player can carry)
+import function GetMaxWeight() : float;
+// returns the current player load (the sum of all carried items weights)
+import function GetCurrentWeight() : float;
 
 class CContainer extends CGameplayEntity
 {
@@ -29,23 +33,50 @@ class CContainer extends CGameplayEntity
 	
 	//default wasUsed = false;
 	
+	var sourceInv	: CInventoryComponent;
+	var targetInv	: CInventoryComponent;
+
+	var arrayData 	: array < CFlashValueScript >;
+	
+	var itemId		: SItemUniqueId;
+	var allItems	: array< SItemUniqueId >;
+	
+	var i			: int;
+	
 	// Entity was dynamically spawned
 	event OnSpawned( spawnData : SEntitySpawnData ) 
 	{
 		this.GetInventory().UpdateLoot();
 		if ( IsLootable() )
-		{
-			SetVisualsFull();
-			
-			if (!isNotEnabledOnSpawn)
-			{
-				GetComponent("Loot").SetEnabled( true );
+		{			
+			if ( isDynamic ) {
+				sourceInv = this.GetInventory();
+				targetInv = thePlayer.GetInventory();
+				
+				sourceInv.GetAllItems( allItems );
+				
+				for ( i = allItems.Size()-1; i >= 0; i-=1 )
+				{
+					itemId = allItems[i];
+					if ( sourceInv.GetItemAttributeAdditive( itemId, 'item_weight' ) == 0  && ! sourceInv.ItemHasTag(itemId, 'Quest') ) {
+						if ( AllowItemDarkDiff( sourceInv, itemId ) ) Helper_TransferItemFromContainerToPlayer( itemId, targetInv, sourceInv, isDynamic );	
+						theSound.PlaySound( "gui/hud/itemlooted" );
+					}
+				}
 			}
 		}
-		else
-		{
+		
+		if ( ! IsLootable() ) {
 			SetVisualsEmpty();
+			DestroyIt();
 			GetComponent("Loot").SetEnabled( false );
+			HideLootWindow();
+		} else {
+			SetVisualsFull();
+			
+			if (!isNotEnabledOnSpawn) {
+				GetComponent("Loot").SetEnabled( true );
+			}
 		}
 	}
 	
